@@ -1,0 +1,24 @@
+{
+    "version": "2.0",
+    "app_name": "pyoniverse-api",
+    "api_gateway_endpoint_type": "REGIONAL",
+    "manage_iam_role": false,
+    "automatic_layer": true,
+    "environment_variables": {
+        "COUNTRY_CODE": "kr"
+    },
+    "stages": {
+        "dev_v1": {
+            "api_gateway_stage": "dev",
+            "environment_variables": {
+                "LOG_LEVEL": "DEBUG"
+            }
+        },
+        "prod_v1": {
+            "api_gateway_stage": "prod",
+            "environment_variables": {
+                "LOG_LEVEL": "INFO"
+            }
+        }
+    }
+}
