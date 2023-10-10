@@ -24,7 +24,7 @@ app = Chalice(app_name="pyoniverse-slack-alarm", debug=debug)
     queue=os.getenv("QUEUE_NAME"),
     batch_size=1,
 )
-def send_slack(event: SQSEvent):
+def send_message(event: SQSEvent):
     for _record in event:
         record: Record = Record.load(json.loads(_record.body))
         return record

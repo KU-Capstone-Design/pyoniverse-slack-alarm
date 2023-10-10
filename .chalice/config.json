@@ -1,6 +1,6 @@
 {
     "version": "2.0",
-    "app_name": "pyoniverse-api",
+    "app_name": "pyoniverse-slack",
     "api_gateway_endpoint_type": "REGIONAL",
     "manage_iam_role": false,
     "automatic_layer": true,
