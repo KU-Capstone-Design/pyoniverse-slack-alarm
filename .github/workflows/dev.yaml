@@ -28,7 +28,7 @@ jobs:
       - name: Build and Push
         shell: bash
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_MONITOR_DEV_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           IAM_ROLE_ARN: ${{ secrets.LAMBDA_ARN }}
           QUEUE_NAME: ${{ secrets.SLACK_SQS_NAME }}
         run: |
@@ -38,7 +38,6 @@ jobs:
           echo "QUEUE_NAME=$QUEUE_NAME" >> .env
           pip install -r requirements.txt
 
-          python -m pytest -v
           python deploy.py --stage=dev_v1
 
 

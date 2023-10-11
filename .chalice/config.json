@@ -11,13 +11,15 @@
         "dev_v1": {
             "api_gateway_stage": "dev",
             "environment_variables": {
-                "LOG_LEVEL": "DEBUG"
+                "LOG_LEVEL": "DEBUG",
+                "SLACK_CHANNEL_ID": "C05NVNS3RQV"
             }
         },
         "prod_v1": {
             "api_gateway_stage": "prod",
             "environment_variables": {
-                "LOG_LEVEL": "INFO"
+                "LOG_LEVEL": "INFO",
+                "SLACK_CHANNEL_ID": "C05NJ4BFA15"
             }
         }
     }

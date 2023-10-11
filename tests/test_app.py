@@ -52,7 +52,7 @@ def invalid_message():
 def client(env):
     from app import app
 
-    with Client(app) as client:
+    with Client(app, stage_name="dev_v1") as client:
         yield client
 
 

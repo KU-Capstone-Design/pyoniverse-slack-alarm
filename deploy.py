@@ -31,6 +31,10 @@ if __name__ == "__main__":
         if "environment_variables" not in config:
             config["environment_variables"] = {}
         config["environment_variables"]["QUEUE_NAME"] = os.getenv("QUEUE_NAME")
+        config["environment_variables"]["SLACK_WEBHOOK_URL"] = os.getenv(
+            "SLACK_WEBHOOK_URL"
+        )
+
         # save config file
         with open(r".chalice/config.json", "w") as f:
             json.dump(config, f, indent=4, ensure_ascii=False)
