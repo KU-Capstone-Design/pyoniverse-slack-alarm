@@ -1,6 +1,5 @@
 import json
 import os
-from dataclasses import asdict
 from functools import reduce
 
 import dotenv
@@ -45,11 +44,15 @@ def send_message(event: SQSEvent):
                 success += 1
     app.log.info(f"result: {success}/{total}")
     if invalid_messages:
+        ps = {}
+        for idx, m in enumerate(invalid_messages):
+            ps[f"reason_{idx}"] = json.dumps(m[1], ensure_ascii=False)
+            ps[f"message_{idx}"] = json.dumps(m[0], ensure_ascii=False)
         message = Message(
             type=MessageTypeEnum.DEBUG,
             source=app.app_name,
             text="Invalid Message Format",
-            ps=[str({"reason": m[1], "message": m[0]}) for m in invalid_messages],
+            ps=ps,
             cc=reduce(lambda acc, cur: acc + cur[0]["cc"], invalid_messages, []),
         )
         slack.send(message)
