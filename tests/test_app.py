@@ -32,7 +32,7 @@ def message():
         "type": "TEST",
         "source": "pyoniverse-slack-alarm",
         "text": "test message",
-        "ps": ["a", "b", "c"],
+        "ps": {"a": "test1", "b": "test2"},
         "cc": ["윤영로"],
     }
 
@@ -43,7 +43,7 @@ def invalid_message():
         "type": "XXX",
         "source": "pyoniverse-slack-alarm",
         "text": "test message",
-        "ps": ["a", "b", "c"],
+        "ps": None,
         "cc": ["윤영로"],
     }
 

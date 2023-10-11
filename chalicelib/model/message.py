@@ -12,15 +12,18 @@ class Message:
     type: MessageTypeEnum
     source: str
     text: str
-    ps: list
+    ps: dict
     cc: list
 
     class __MessageSchema(Schema):
         type: str = fields.Enum(required=True, enum=MessageTypeEnum)
         source: str = fields.Str(required=True)
         text: str = fields.Str(required=True)
-        ps: List[str] = fields.List(
-            fields.Str(), required=True, allow_none=True, default=[]
+        ps: dict = fields.Dict(
+            allow_none=True,
+            keys=fields.Str(),
+            values=fields.Str(),
+            load_default={},
         )
         cc: List[str] = fields.List(
             fields.Str(), required=True, validate=lambda x: len(x) > 0
