@@ -40,8 +40,6 @@ class Slack:
             block_builder.add_plain_text_section(v)
             block_builder.add_divider()
         body = {"blocks": block_builder.build()}
-        with open("test.json", "w") as fd:
-            json.dump(body, fd, ensure_ascii=False)
         res = post(self.webhook_url, data=json.dumps(body))
         if res.status_code != 200:
             self.logger.error(f"Fail to send {body}. Because {res.text}")

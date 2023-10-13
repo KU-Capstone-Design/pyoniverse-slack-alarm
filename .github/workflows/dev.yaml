@@ -30,7 +30,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           IAM_ROLE_ARN: ${{ secrets.LAMBDA_ARN }}
-          QUEUE_NAME: ${{ secrets.SLACK_SQS_NAME }}
+          QUEUE_NAME: ${{ secrets.SLACK_SQS_NAME_DEV }}
         run: |
           # Make .env file
           echo "SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL" >> .env
