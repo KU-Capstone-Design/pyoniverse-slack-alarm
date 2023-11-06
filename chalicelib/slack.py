@@ -37,7 +37,10 @@ class Slack:
         block_builder.add_header("Additional Information")
         for k, v in message.ps.items():
             block_builder.add_markdown_section(f"*{k}*")
-            block_builder.add_plain_text_section(v)
+            if len(v) > 100:
+                block_builder.add_plain_text_section(v[:100] + "...")
+            else:
+                block_builder.add_plain_text_section(v)
             block_builder.add_divider()
         body = {"blocks": block_builder.build()}
         res = post(self.webhook_url, data=json.dumps(body))
