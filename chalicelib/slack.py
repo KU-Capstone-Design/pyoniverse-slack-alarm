@@ -42,7 +42,12 @@ class Slack:
             else:
                 block_builder.add_plain_text_section(v)
             block_builder.add_divider()
-        body = {"blocks": block_builder.build()}
+        # DB Channel 분리
+        if message.source == "pyoniverse-update-db":
+            channel = os.getenv("MONITOR_DB_CHANNEL")
+        else:
+            channel = os.getenv("MONITOR_CHANNEL")
+        body = {"blocks": block_builder.build(), "channel": channel}
         res = post(self.webhook_url, data=json.dumps(body))
         if res.status_code != 200:
             self.logger.error(f"Fail to send {body}. Because {res.text}")

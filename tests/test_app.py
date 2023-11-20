@@ -38,6 +38,17 @@ def message():
 
 
 @pytest.fixture
+def db_message():
+    return {
+        "type": "TEST",
+        "source": "pyoniverse-update-db",
+        "text": "test message",
+        "ps": {"a": "test1", "b": "test2"},
+        "cc": ["윤영로"],
+    }
+
+
+@pytest.fixture
 def invalid_message():
     return {
         "type": "XXX",
@@ -76,3 +87,14 @@ def test_invalid_message(client, invalid_message):
         ),
     )
     assert response.payload == {"result": "0/1"}
+
+
+def test_db_send(client, db_message):
+    response = client.lambda_.invoke(
+        "send_message",
+        client.events.generate_sqs_event(
+            queue_name=os.getenv("QUEUE_NAME"),
+            message_bodies=[json.dumps(db_message, ensure_ascii=False)],
+        ),
+    )
+    assert response.payload == {"result": "1/1"}
