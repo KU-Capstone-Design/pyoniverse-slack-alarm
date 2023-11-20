@@ -36,6 +36,8 @@ jobs:
           echo "SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL" >> .env
           echo "IAM_ROLE_ARN=$IAM_ROLE_ARN" >> .env
           echo "QUEUE_NAME=$QUEUE_NAME" >> .env
+          echo "MONITOR_DB_CHANNEL=${{ secrets.MONITOR_DB_CHANNEL }}"
+          echo "MONITOR_CHANNEL=${{ secrets.MONITOR_DEV_CHANNEL }}"
           pip install -r requirements.txt
 
           python deploy.py --stage=dev_v1
