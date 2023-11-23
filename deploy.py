@@ -28,12 +28,16 @@ if __name__ == "__main__":
         # update config file
         config["manage_iam_role"] = False
         config["iam_role_arn"] = os.getenv("IAM_ROLE_ARN")
-        if "environment_variables" not in config:
-            config["environment_variables"] = {}
-        config["environment_variables"]["QUEUE_NAME"] = os.getenv("QUEUE_NAME")
-        config["environment_variables"]["SLACK_WEBHOOK_URL"] = os.getenv(
-            "SLACK_WEBHOOK_URL"
+        env_variables = {}
+        env_variables["QUEUE_NAME"] = os.getenv("QUEUE_NAME")
+        env_variables["SLACK_WEBHOOK_URL"] = os.getenv("SLACK_WEBHOOK_URL")
+        env_variables["MONITOR_DB_CHANNEL"] = os.getenv("MONITOR_DB_CHANNEL")
+        env_variables["MONITOR_CHANNEL"] = os.getenv("MONITOR_CHANNEL")
+
+        config[args.stage]["environment_variables"]: dict = (
+            config[args.stage]["environment_variables"] or {}
         )
+        config[args.stage]["environment_variables"].update(env_variables)
 
         # save config file
         with open(r".chalice/config.json", "w") as f:
