@@ -3,7 +3,7 @@
     {
       "name": "managed-layer",
       "resource_type": "lambda_layer",
-      "layer_version_arn": "arn:aws:lambda:ap-northeast-2:792939917746:layer:pyoniverse-slack-dev_v1-managed-layer:2"
+      "layer_version_arn": "arn:aws:lambda:ap-northeast-2:792939917746:layer:pyoniverse-slack-dev_v1-managed-layer:11"
     },
     {
       "name": "send_message",
@@ -13,9 +13,9 @@
     {
       "name": "send_message-sqs-event-source",
       "resource_type": "sqs_event",
-      "queue_arn": "arn:aws:sqs:ap-northeast-2:792939917746:pyoniverse-slack",
-      "event_uuid": "7856189e-4694-42fd-bcb8-1ab66828a128",
-      "queue": "pyoniverse-slack",
+      "queue_arn": "arn:aws:sqs:ap-northeast-2:792939917746:pyoniverse-slack-dev",
+      "event_uuid": "6d7303de-7913-4634-a76c-e0ace74416c3",
+      "queue": "pyoniverse-slack-dev",
       "lambda_arn": "arn:aws:lambda:ap-northeast-2:792939917746:function:pyoniverse-slack-dev_v1-send_message"
     }
   ],
