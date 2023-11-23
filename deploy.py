@@ -34,10 +34,10 @@ if __name__ == "__main__":
         env_variables["MONITOR_DB_CHANNEL"] = os.getenv("MONITOR_DB_CHANNEL")
         env_variables["MONITOR_CHANNEL"] = os.getenv("MONITOR_CHANNEL")
 
-        config[args.stage]["environment_variables"]: dict = (
-            config[args.stage]["environment_variables"] or {}
+        config["stages"][args.stage]["environment_variables"]: dict = (
+            config["stages"][args.stage]["environment_variables"] or {}
         )
-        config[args.stage]["environment_variables"].update(env_variables)
+        config["stages"][args.stage]["environment_variables"].update(env_variables)
 
         # save config file
         with open(r".chalice/config.json", "w") as f:
@@ -45,8 +45,8 @@ if __name__ == "__main__":
         # deploy
         os.system(f"chalice deploy --stage {args.stage}")
     except Exception as e:
-        tb = traceback.format_exc()
-        print(f"Error: {tb}")
+        print(f"Error: {traceback.format_exc()}")
+        raise e
     finally:
         # rollback config file
         with open(r".chalice/config.json.bak", "r") as f:
