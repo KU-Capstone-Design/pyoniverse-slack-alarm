@@ -40,7 +40,7 @@ jobs:
           echo "MONITOR_CHANNEL=${{ secrets.MONITOR_DEV_CHANNEL }}" >> .env
           pip install -r requirements.txt
 
-          python deploy.py --stage={{ env.STAGE }}
+          python deploy.py --stage=${{ env.STAGE }}
 
 
       - name: Deploy Alarm
