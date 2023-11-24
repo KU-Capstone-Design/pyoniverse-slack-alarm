@@ -1,13 +1,13 @@
 name: Deploy Slack Alarm Lambda
 on:
   push:
-    branches: [ develop ]
+    branches: [ prod ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      STAGE: dev_v1
+      STAGE: prod_v1
 
     steps:
       - name: Checkout
@@ -30,17 +30,17 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           IAM_ROLE_ARN: ${{ secrets.LAMBDA_ARN }}
-          QUEUE_NAME: ${{ secrets.SLACK_SQS_NAME_DEV }}
+          QUEUE_NAME: ${{ secrets.SLACK_SQS_NAME_PROD }}
         run: |
           # Make .env file
           echo "SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL" >> .env
           echo "IAM_ROLE_ARN=$IAM_ROLE_ARN" >> .env
           echo "QUEUE_NAME=$QUEUE_NAME" >> .env
-          echo "MONITOR_DB_CHANNEL=${{ secrets.MONITOR_DB_DEV_CHANNEL }}" >> .env
-          echo "MONITOR_CHANNEL=${{ secrets.MONITOR_DEV_CHANNEL }}" >> .env
+          echo "MONITOR_DB_CHANNEL=${{ secrets.MONITOR_DB_PROD_CHANNEL }}" >> .env
+          echo "MONITOR_CHANNEL=${{ secrets.MONITOR_PROD_CHANNEL }}" >> .env
           pip install -r requirements.txt
 
-          python deploy.py --stage={{ env.STAGE }}
+          python deploy.py --stage=${{ env.STAGE }}
 
 
       - name: Deploy Alarm
